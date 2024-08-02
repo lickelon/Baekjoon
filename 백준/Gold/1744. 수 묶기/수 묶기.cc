@@ -19,7 +19,6 @@ int main()
     int n;
     cin >> n;
     deque<int> neg, pos;
-    bool zero = false;
     int ans = 0;
     for(int i = 0; i < n; i++) {
         int input;
