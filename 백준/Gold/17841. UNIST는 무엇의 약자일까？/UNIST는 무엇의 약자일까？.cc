@@ -51,7 +51,7 @@ int main()
             dp[i][arr[i].first+j] %= 1000000007;
         }
     }
-    cout << dp[n-1][4] % 1000000007;
+    cout << dp[n-1][4];
 
     return 0;
 }
