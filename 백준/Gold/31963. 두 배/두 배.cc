@@ -20,37 +20,23 @@ int main()
     cin >> n;
     vector<int> arr(n);
     for(auto &u : arr) cin >> u;
-    vector<ll> mult(n);
-    for(int i = 1; i < n; i++) {
-        int a = arr[i-1], b = arr[i];
-        if(a < b) {
-            int cnt = 0;
-            b -= 1;
-            while(a < b) {
-                a *= 2;
-                cnt++;
-            }
-            mult[i] = -cnt;
-        }
-        else if(a > b){
-            int cnt = 0;
-            while(b < a) {
-                b *= 2;
-                cnt++;
-            }
-            mult[i] = cnt;
-        }
-        else {
-            mult[i] = 0;
-        }
-    }
-
     ll ans = 0;
-    ll curr = 0;
+    ll cnt = 0;
     for(int i = 1; i < n; i++) {
-        curr += mult[i];
-        curr = max(curr, 0ll);
-        ans += curr;
+        //2^cnt*a <= b*2^next
+        ll next = cnt;
+        ll a = arr[i-1], b = arr[i];
+        while(a > b) {
+            b *= 2;
+            next++;
+        }
+        while(a * 2 <= b) {
+            a *= 2;
+            next--;
+        }
+        next = max(next, 0ll);
+        ans += next;
+        cnt = next;
     }
     cout << ans;
 
