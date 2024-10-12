@@ -1,45 +1,68 @@
-#include <bits/stdc++.h>
-
-#define all(x) (x).begin(), (x).end()
-
-#define INF 0x7FFFFFFF
-
+#include <iostream>
+#include <cstring>
+#include <string.h>
 using namespace std;
 
-using ll = long long;
-using ld = long double;
-using pii = pair<int,int>;
-using pll = pair<ll, ll>;
-
-int is_palindrome(string s, int t) {
-    int n = s.length();
-    int ret = 3;
-    for(int i = 0; i < n; i++) {
-        if(s[i] != s[n-1-i]) {
-            if(t == 1) return 2;
-            string temp = s.substr(i+1, n-1-i-i);
-            ret = min(ret, is_palindrome(temp, 1));
-            temp = s.substr(i, n-1-i-i);
-            ret = min(ret, is_palindrome(temp, 1));
+void solve(char arr[100001],int left,int right,int *ans){
+    while(left <= right){
+        if(arr[left] != arr[right]){
+            
+            *ans = 2;
+           
             break;
         }
+        left++;
+        right--;
     }
-    if(ret == 3) ret = t;
-    return ret;
 }
 
-int main()
-{
-    ios::sync_with_stdio(0);
-    cin.tie(0); cout.tie(0);
 
-    int T;
-    cin >> T;
-    while(T--) {
-        string s;
-        cin >> s;
-        cout << is_palindrome(s, 0) << "\n"; 
+int main(){
+    cin.tie(0);
+    ios_base::sync_with_stdio(0);
+    int n;
+    cin >> n;
+    while (n--){
+        
+        char arr[100001];
+        cin >> arr;
+        
+        int ans = 0;
+        int left = 0;
+        int right  = strlen(arr)-1;
+        
+        while(left <= right){
+            if(arr[left] != arr[right]){
+                
+             
+                    ans++;
+                    if(ans ==2 ){
+                        break;
+                    }
+                
+                    solve(arr, left+1, right, &ans);
+                  
+                    if(ans == 1){
+                        break;
+                    }
+                    if(ans == 2){
+                        ans=1;
+                        
+                        solve(arr, left, right-1, &ans);
+                        
+                    }
+                    break;
+                    
+                    
+                
+            
+            }
+            left++;
+            right--;
+            
+        }
+        
+        cout<<ans<<"\n";
+        
     }
-
-    return 0;
 }
