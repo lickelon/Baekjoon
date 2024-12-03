@@ -20,13 +20,15 @@ int main()
     cin >> n;
     vector<int> arr(n);
     for(auto &e : arr) cin >> e;
-    int s = 2500;
-    vector<vector<int>> bucket(n/s+1);
+    int s = sqrt(n);
+    vector<array<int, 10001>> bucket(n/s+1);
     for(int i = 0; i < n; i++) {
-        bucket[i/s].emplace_back(arr[i]);
+        bucket[i/s][arr[i]]++;
     }
-    for(auto &e : bucket) {
-        sort(all(e));
+    for(int i = 1; i < bucket.size(); i++) {
+        for(int j = 0; j <= 10000; j++) {
+            bucket[i][j] += bucket[i-1][j];
+        }
     }
 
     int m;
@@ -34,33 +36,37 @@ int main()
     for(int i = 0; i < m; i++) {
         int q;
         cin >> q;
+        if(q == 1) {
+            int idx, v;
+            cin >> idx >> v;
+            idx--;
+            for(int i = idx / s; i < bucket.size(); i++) {
+                bucket[i][arr[idx]]--;
+                bucket[i][v]++;
+            }
+            arr[idx] = v;
+        }
         if(q == 2) {
-            int l, r, k;
-            cin >> l >> r >> k;
-            l--, r--;
+            int i, j, k;
+            cin >> i >> j >> k;
+            i--, j--;
+            int ix = i/s, jx = j/s;
             int ans = 0;
-            for(int i = l; i <= r; i++) {
-                if((i-1)/s != (i/s) && i+s-1 <= r) {
-                    int idx = i/s;
-                    ans += bucket[idx].end() - upper_bound(all(bucket[idx]), k);
-                    i += s-1;
-                }
-                else {
-                    ans += (arr[i] > k);
-                }
+            for(int t = k+1; t <= 10000; t++) {
+                int r = bucket[jx][t];
+                int l = (ix > 0) ? bucket[ix-1][t] : 0;
+                ans += r-l;
+            }
+            for(int t = ix*s; t < i; t++) {
+                ans -= (arr[t] > k);
+            }
+            for(int t = j+1; t < min(jx*s+s, n); t++) {
+                ans -= (arr[t] > k);
             }
             cout << ans << "\n";
         }
-        if(q == 1) {
-            int i, k;
-            cin >> i >> k;
-            i--;
-            int idx = i/s;
-            bucket[idx].erase(lower_bound(all(bucket[idx]),arr[i]));
-            arr[i] = k;
-            bucket[idx].insert(lower_bound(all(bucket[idx]),k),k);
-        }
     }
+
 
     return 0;
 }
