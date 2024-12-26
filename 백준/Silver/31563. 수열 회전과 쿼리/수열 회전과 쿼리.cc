@@ -32,13 +32,11 @@ int main()
         cin >> qa;
         if(qa == 1) {
             cin >> a;
-            p += n - a;
-            p %= n;
+            p = (p-a+n)%n;
         }
         if(qa == 2) {
             cin >> a;
-            p += a;
-            p %= n;
+            p = (p+a)%n;
         }
         if(qa == 3) {
             cin >> a >> b;
