@@ -19,9 +19,9 @@ int main()
     int a, b, c;
     cin >> a >> b >> c;
 
-    for(int i = c; i >= 0; i--) {
-        int ta = a + (c-i);
-        int tb = b + i;
+    for(int i = 0; i <= c; i++) {
+        int ta = a + i;
+        int tb = b + (c-i);
         if(ta % 3 == 0 && tb % 4 == 0) {
             cout << ta/3 << " " << tb/4;
             return 0;
