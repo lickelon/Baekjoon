@@ -17,6 +17,7 @@ ll gcd(ll a, ll b)
     return gcd(b, a % b);
 }
 
+int arr[2001][2001] = {};
 int main()
 {
     ios::sync_with_stdio(0);
@@ -25,13 +26,17 @@ int main()
     int d1, d2;
     cin >> d1 >> d2;
 
-    set<pll> _s;
+    int ans = 0;
     for(ll i = d1; i <= d2; i++) {
-        for(ll j = 0; j < i; j++) {
-            _s.emplace(j/gcd(i,j), i/gcd(i,j));
+        for(ll j = 1; j <= i; j++) {
+            int g = gcd(i, j);
+            if(!arr[j/g][i/g]) {
+                arr[j/g][i/g] = 1;
+                ans++;
+            }
         }
     }
-    cout << _s.size();
+    cout << ans;
 
     return 0;
 }
