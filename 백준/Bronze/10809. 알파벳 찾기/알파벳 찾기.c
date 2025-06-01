@@ -1,0 +1,1 @@
+char s[],*x;main(c){for(gets(s);c++<27;printf("%d ",x?x-s:-1))x=strchr(s,c+95);}
