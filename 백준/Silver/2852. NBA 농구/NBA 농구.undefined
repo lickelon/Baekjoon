@@ -1,5 +1,4 @@
 #include <bits/stdc++.h>
-#include <format>
 
 #define all(x) (x).begin(), (x).end()
 
@@ -45,8 +44,8 @@ int main()
         if(a == 2) sb++;
         bt = t;
     }
-    cout << format("{:02d}:{:02d}", ta/60, ta%60) << "\n";
-    cout << format("{:02d}:{:02d}", tb/60, tb%60) << "\n";
+    print("{:02d}:{:02d}\n", ta/60, ta%60);
+    print("{:02d}:{:02d}\n", tb/60, tb%60);
 
     return 0;
 }
