@@ -1,0 +1,27 @@
+#include <bits/stdc++.h>
+
+#define INF 0x3FFFFFFF
+
+using namespace std;
+
+using ll = long long;
+using ld = long double;
+using pii = pair<int,int>;
+using pll = pair<ll, ll>;
+
+int main()
+{
+    ios::sync_with_stdio(0);
+    cin.tie(0); cout.tie(0);
+
+    int n;
+    string s;
+    cin >> n >> s;
+    if(s == "miss") print("{}", 0);
+    if(s == "bad") print("{}", n*200);
+    if(s == "cool") print("{}", n*400);
+    if(s == "great") print("{}", n*600);
+    if(s == "perfect") print("{}", n*1000);
+
+    return 0;
+}
