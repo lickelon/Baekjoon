@@ -1,0 +1,30 @@
+#include <bits/stdc++.h>
+
+#define INF 0x3FFFFFFF
+
+using namespace std;
+
+using ll = long long;
+using ld = long double;
+using pii = pair<int,int>;
+using pll = pair<ll, ll>;
+
+int main()
+{
+    ios::sync_with_stdio(0);
+    cin.tie(0); cout.tie(0);
+
+    int n;
+    cin >> n;
+
+    vector<string> A(n), B(n);
+    for(auto &e : A) cin >> e;
+    for(auto &e : B) cin >> e;
+    
+    cout << ranges::count_if(views::zip(A, B), [](auto p) {
+        auto [a, b] = p;
+        return a == b;
+    });
+
+    return 0;
+}
