@@ -20,6 +20,6 @@ int main()
     vector<pair<ld, ld>> arr(n);
     for(auto &[a, b] : arr) cin >> a >> b;
 
-    print("{:.3f}", ranges::fold_left(arr | views::transform([](auto x) -> ld {return x.first * x.second;}), 0.0L, [](auto a, auto b){return a+b;}));
+    print("{:.3f}", ranges::fold_left(arr | views::transform([](auto x) {return x.first * x.second;}), 0.0L, plus<ld>()));
     return 0;
 }
