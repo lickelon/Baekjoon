@@ -1,0 +1,52 @@
+#include <bits/stdc++.h>
+#include <format>
+
+#define all(x) (x).begin(), (x).end()
+
+#define INF 0x3FFFFFFF
+
+using namespace std;
+
+using ll = long long;
+using ld = long double;
+using pii = pair<int,int>;
+using pll = pair<ll, ll>;
+
+int main()
+{
+    ios::sync_with_stdio(0);
+    cin.tie(0); cout.tie(0);
+
+    int n;
+    cin >> n;
+
+    vector<pii> arr(n);
+    for(int i = 0; i < n; i++) {
+        int a;
+        string s;
+        cin >> a >> s;
+        int t = (s[0]*10+s[1]-528) * 60 + (s[3]*10+s[4]-528);
+        arr[i] = {t, a};
+    }
+    arr.emplace_back(48*60, 0);
+    ranges::sort(arr);
+
+    int sa, sb, ta, tb;
+    sa = sb = ta = tb = 0;
+    int bt = 0;
+    for(auto &[t, a] : arr) {
+        if(sa > sb) {
+            ta += t - bt;
+        }
+        if(sb > sa) {
+            tb += t - bt;
+        }
+        if(a == 1) sa++;
+        if(a == 2) sb++;
+        bt = t;
+    }
+    cout << format("{:02d}:{:02d}", ta/60, ta%60) << "\n";
+    cout << format("{:02d}:{:02d}", tb/60, tb%60) << "\n";
+
+    return 0;
+}
