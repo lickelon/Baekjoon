@@ -19,8 +19,8 @@ int main()
     vector<string> arr(n);
     for(auto &e : arr) cin >> e;
 
-    int cnt = ranges::count_if(arr, [&](string s) -> bool {
-        return ranges::count_if(s, [](auto c){return c == 'O';}) * 2 > m;
+    int cnt = ranges::count_if(arr, [&](string &s) -> bool {
+        return ranges::count(s, 'O') * 2 > m;
     });
     print("{}", cnt);
     return 0;
