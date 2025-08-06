@@ -1,0 +1,28 @@
+#include <bits/stdc++.h>
+
+#define INF 0x3FFFFFFF
+
+using namespace std;
+
+using ll = long long;
+using ld = long double;
+using pii = pair<int,int>;
+using pll = pair<ll, ll>;
+
+int main()
+{
+    ios::sync_with_stdio(0);
+    cin.tie(0); cout.tie(0);
+
+    string s;
+    cin >> s;
+    print("{} {}", ranges::count_if(s, [](char c) -> bool {
+        string t = "aeiou";
+        return t.find(c) != string::npos;
+    }), ranges::count_if(s, [](char c) -> bool {
+        string t = "aeiouy";
+        return t.find(c) != string::npos;
+    }));
+
+    return 0;
+}
