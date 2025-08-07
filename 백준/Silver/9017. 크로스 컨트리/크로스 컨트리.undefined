@@ -1,0 +1,50 @@
+#include <bits/stdc++.h>
+
+#define INF 0x3FFFFFFF
+
+using namespace std;
+
+using ll = long long;
+using ld = long double;
+using pii = pair<int,int>;
+using pll = pair<ll, ll>;
+
+int main()
+{
+    ios::sync_with_stdio(0);
+    cin.tie(0); cout.tie(0);
+
+    int T;
+    cin >> T;
+    while(T--) {
+        int n;
+        cin >> n;
+        vector<int> arr(n);
+        for(auto &e : arr) cin >> e;
+
+        vector<int> new_arr = ranges::to<vector<int>>(arr | views::filter([&](int x){return ranges::count(arr, x) == 6;}));
+
+        int m = ranges::max(new_arr);
+        vector<vector<int>> pos(m+1);
+        for(int i = 0; i < new_arr.size(); i++) {
+            pos[new_arr[i]].emplace_back(i);
+        }
+
+        auto ans = ranges::to<vector<pair<int,vector<int>>>>(
+              views::iota(0, m+1)
+            | views::filter([&](auto x){return pos[x].size() == 6;})
+            | views::transform([&](int x){return pair{x, pos[x]};})
+        );
+
+        auto proj = [](auto& pr) {
+            auto v = pr.second;
+            return pair{accumulate(v.begin(), v.begin()+4, 0), v[4]};
+        };
+
+        ranges::sort(ans, less(), proj);
+        println("{}",ans[0].first);
+
+    }
+
+    return 0;
+}
