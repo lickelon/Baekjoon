@@ -1,0 +1,32 @@
+#include <bits/stdc++.h>
+
+#define INF 0x3FFFFFFF
+
+using namespace std;
+
+using ll = long long;
+using ld = long double;
+using pii = pair<int,int>;
+using pll = pair<ll, ll>;
+
+int main()
+{
+    ios::sync_with_stdio(0);
+    cin.tie(0); cout.tie(0);
+
+    int T;
+    cin >> T;
+    while(T--) {
+        string s;
+        cin >> s;
+        int n = s.length();
+        string t{s.rbegin(), s.rend()};
+        int i = *ranges::find_if(views::iota(0, n+1), [&](int i) {
+            string cand = s.substr(0, i) + t;
+            return ranges::equal(cand, cand | views::reverse);
+        });
+        println("{}", s.substr(0, i) + t);
+    }
+
+    return 0;
+}
