@@ -1,0 +1,53 @@
+#include <bits/stdc++.h>
+
+#define INF 0x3FFFFFFF
+
+using namespace std;
+
+using ll = long long;
+using ld = long double;
+using pii = pair<int,int>;
+using pll = pair<ll, ll>;
+
+int main()
+{
+    ios::sync_with_stdio(0);
+    cin.tie(0); cout.tie(0);
+
+    char v[] = {'a', 'i', 'y', 'e', 'o', 'u'};
+    char co[] = {'b', 'k', 'x', 'z', 'n', 'h', 'd', 'c', 'w', 'g', 'p', 'v', 'j', 'q', 't', 's', 'r', 'l', 'm', 'f'};
+
+    string s;
+    while(getline(cin, s)) {
+        for(auto &c : s) {
+            if(!isalpha(c)) continue;
+            bool upper = false;
+            if(isupper(c)) {
+                c += 32;
+                upper = true;
+            }
+            bool vowel = false;
+            if(ranges::find(v, c) < v+6) vowel = true;
+
+            if(vowel) {
+                int x = ranges::find(v, c) - v;
+                x = (x + 6 - 3) % 6;
+                c = v[x];
+            }
+            else {
+                int x = ranges::find(co, c) - co;
+                x = (x + 20 - 10) % 20;
+                c = co[x];
+            }
+
+            if(upper) {
+                c -= 32;
+            }
+        }
+        println("{}", s);
+    }
+
+
+
+    return 0;
+}
