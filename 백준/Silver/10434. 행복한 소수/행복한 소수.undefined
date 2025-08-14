@@ -1,0 +1,54 @@
+#include <bits/stdc++.h>
+
+#define INF 0x3FFFFFFF
+
+using namespace std;
+
+using ll = long long;
+using ld = long double;
+using pii = pair<int,int>;
+using pll = pair<ll, ll>;
+
+int get_powsum(int k) {
+    int ret = 0;
+    while(k) {
+        int temp = k%10;
+        ret += temp * temp;
+        k /= 10;
+    }
+    return ret;
+}
+
+int main()
+{
+    ios::sync_with_stdio(0);
+    cin.tie(0); cout.tie(0);
+
+    int T;
+    cin >> T;
+    while(T--) {
+        int x, m;
+        cin >> x >> m;
+        print("{} {} ", x, m);
+
+        bool flag = m != 1;
+        for(int i = 2; i * i <= m; i++) {
+            if(m%i == 0) flag = false;
+        }
+        int check[10001] = {};
+        int curr  = m;
+        check[curr] = 1;
+        while(curr != 1) {
+            int nxt = get_powsum(curr);
+            if(check[nxt]) {
+                flag = false;
+                break;
+            }
+            check[nxt] = 1;
+            curr = nxt;
+        }
+        println("{}", (flag ? "YES" : "NO"));
+    }
+
+    return 0;
+}
