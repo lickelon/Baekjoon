@@ -1,0 +1,43 @@
+#include <bits/stdc++.h>
+
+#define INF 0x3FFFFFFF
+
+using namespace std;
+
+using ll = long long;
+using ld = long double;
+using pii = pair<int,int>;
+using pll = pair<ll, ll>;
+
+int main()
+{
+    ios::sync_with_stdio(0);
+    cin.tie(0); cout.tie(0);
+
+    int n, m;
+    cin >> n >> m;
+
+    vector<int> arr;
+    int cnt = 0;
+    for(int i = 0; i < n; i++) {
+        int input;
+        cin >> input;
+        if(input % 10 == 0) arr.emplace_back(input);
+        else cnt += input / 10;
+    }
+    ranges::sort(arr);
+
+    int ans = 0;
+    for(auto e : arr) {
+        while(m > 0 && e > 10) {
+            m -= 1;
+            ans += 1;
+            e -= 10;
+        }
+        if(e == 10) ans++;
+    }
+    ans += min(m, cnt);
+    print("{}", ans);
+
+    return 0;
+}
