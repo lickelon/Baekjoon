@@ -1,0 +1,50 @@
+#include <bits/stdc++.h>
+
+#define all(x) (x).begin(), (x).end()
+
+#define INF 0x3FFFFFFF
+
+using namespace std;
+
+using ll = long long;
+using ld = long double;
+using pii = pair<int,int>;
+using pll = pair<ll, ll>;
+
+ll func(ll x) {
+    if(x % 2) return 3*x + 1;
+    else return x/2;
+}
+
+int main()
+{
+    ios::sync_with_stdio(0);
+    cin.tie(0); cout.tie(0);
+
+    while(true) {
+        ll a, b;
+        cin >> a >> b;
+        if(a == 0 && b == 0) break;
+        vector<ll> sa, sb;
+
+        sa.emplace_back(a);
+        while(sa.back() != 1) {
+            sa.emplace_back(func(sa.back()));
+        }
+
+        sb.emplace_back(b);
+        while(sb.back() != 1) {
+            sb.emplace_back(func(sb.back()));
+        }
+
+        int i = sa.size()-1, j=sb.size()-1;
+        while(sa[i] == sb[j]) {
+            i--, j--;
+            if(i < 0 || j < 0) break;
+        }
+        i++, j++;
+        println("{} needs {} steps, {} needs {} steps, they meet at {}", a, i, b, j, sa[i]);
+    }
+
+    return 0;
+}
