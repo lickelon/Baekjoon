@@ -1,0 +1,37 @@
+#include <bits/stdc++.h>
+
+#define INF 0x3FFFFFFF
+
+using namespace std;
+
+using ll = long long;
+using ld = long double;
+using pii = pair<int,int>;
+using pll = pair<ll, ll>;
+
+int main()
+{
+    ios::sync_with_stdio(0);
+    cin.tie(0); cout.tie(0);
+
+    int n, m;
+    cin >> n >> m;
+
+    vector<int> arr(n+1);
+    for(int i = 1; i <= m; i++) {
+        int l, r;
+        cin >> l >> r;
+        for(int j = l; j <= r; j++) {
+            arr[j] = i;
+        }
+    }
+
+    set<int> _s;
+    for(int i = 1; i <= n; i++) {
+        _s.insert(arr[i]);
+    }
+
+    println("{}", 1ll << (_s.size() - (_s.find(0) != _s.end())));
+
+    return 0;
+}
