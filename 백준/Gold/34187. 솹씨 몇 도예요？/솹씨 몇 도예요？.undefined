@@ -1,0 +1,40 @@
+#include <bits/stdc++.h>
+
+#define all(x) (x).begin(), (x).end()
+
+#define INF 0x3FFFFFFF
+
+using namespace std;
+
+using ll = long long;
+using ld = long double;
+using pii = pair<int,int>;
+using pll = pair<ll, ll>;
+
+int main()
+{
+    ios::sync_with_stdio(0);
+    cin.tie(0); cout.tie(0);
+
+    int l = 0, r = 2025;
+    while(true) {
+        int q = (r+l)/2;
+        cout << "? " << q << endl;
+        string ret;
+        cin >> ret;
+        if(ret == "Cold") {
+            r = (q+r)/2;
+            l = q+1;
+        }
+        if(ret == "Hot") {
+            l = (l+q)/2;
+            r = q-1;
+        }
+        if(ret == "SUAPC!") {
+            cout << "! " << q << endl;
+            break;
+        }
+    }
+
+    return 0;
+}
