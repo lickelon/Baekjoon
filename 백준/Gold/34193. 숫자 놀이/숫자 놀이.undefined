@@ -1,0 +1,43 @@
+#include <bits/stdc++.h>
+
+#define all(x) (x).begin(), (x).end()
+
+#define INF 0x3FFFFFFF
+
+using namespace std;
+
+using ll = long long;
+using ld = long double;
+using pii = pair<int,int>;
+using pll = pair<ll, ll>;
+
+ll func(ll N){
+    ll cnt = 0;
+
+    for(ll i = 1; i*i <= N; i++){
+        if(N%i==0){
+            cnt++;
+            if(i != N/i) cnt++;
+        }
+    }
+
+    return cnt;
+}
+
+int main()
+{
+    ios::sync_with_stdio(0);
+    cin.tie(0); cout.tie(0);
+
+    int T;
+    cin >> T;
+    
+    while(T--) {
+        ll x, n;
+        cin >> x >> n;
+        if(x == 1) cout << func(n+1) << "\n";
+        else cout << (ll)(n % x == 0) << "\n";
+    }
+
+    return 0;
+}
