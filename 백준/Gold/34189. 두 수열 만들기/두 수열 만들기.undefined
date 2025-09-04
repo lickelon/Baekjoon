@@ -1,0 +1,99 @@
+#include <bits/stdc++.h>
+
+#define all(x) (x).begin(), (x).end()
+
+#define INF 0x3FFFFFFF
+
+using namespace std;
+
+using ll = long long;
+using ld = long double;
+using pii = pair<int,int>;
+using pll = pair<ll, ll>;
+
+int main()
+{
+    ios::sync_with_stdio(0);
+    cin.tie(0); cout.tie(0);
+
+    int n;
+    cin >> n;
+    n *= 2;
+    vector<int> arr(n);
+    for(auto &e : arr) cin >> e;
+    
+    vector<vector<int>> edge(n);
+    for(int i = 0; i < n; i++) {
+        for(int j = i+1; j < n; j++) {
+            int a = arr[i] ^ arr[j];
+            if((a & (a-1)) == 0) {
+                edge[i].emplace_back(j);
+                edge[j].emplace_back(i);
+            }
+        }
+    }
+
+    vector<int> visit(n, 0);
+    vector<pair<int, vector<int>>> cnt;
+    for(int i = 0; i < n; i++) {
+        if(visit[i]) continue;
+
+        vector<int> lst;
+        queue<int> _q;
+        _q.push(i);
+        visit[i] = true;
+        int temp = 1;
+        while(!_q.empty()) {
+            int curr = _q.front(); _q.pop();
+            lst.emplace_back(curr);
+            for(auto v : edge[curr]) {
+                if(visit[v]) continue;
+                _q.push(v);
+                temp++;
+                visit[v] = true;
+            }
+        }
+        cnt.emplace_back(temp, lst);
+    }
+
+    vector<array<unordered_set<int>, 2>> dp(cnt.size());
+    // [a][b][c] : a=보고 있는 집합, b=포함,미포함, c=값의 가능여부
+    dp[0][0].insert(0);
+    dp[0][1].insert(cnt[0].first);
+    for(int i = 1; i < cnt.size(); i++) {
+        for(auto x : dp[i-1][0]) {
+            dp[i][0].insert(x);
+            dp[i][1].insert(x+cnt[i].first);
+        }
+        for(auto x : dp[i-1][1]) {
+            dp[i][0].insert(x);
+            dp[i][1].insert(x+cnt[i].first);
+        }
+    }
+    int target = n/2;
+    vector<int> loc(n);
+    for(int i = cnt.size()-1; i >= 0; i--) {
+        if(dp[i][0].find(target) != dp[i][0].end()) {
+            continue;
+        }
+        if(dp[i][1].find(target) != dp[i][1].end()) {
+            for(auto e : cnt[i].second) {
+                loc[e] = 1;
+            }
+            target -= cnt[i].first;
+            continue;
+        }
+        cout << "-1\n";
+        return 0;
+    }
+    for(int i = 0; i < n; i++) {
+        if(loc[i]) cout << arr[i] << " ";
+    }
+    cout << "\n";
+    for(int i = 0; i < n; i++) {
+        if(!loc[i]) cout << arr[i] << " ";
+    }
+    cout << "\n";
+
+    return 0;
+}
