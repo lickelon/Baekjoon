@@ -1,0 +1,60 @@
+#include <bits/stdc++.h>
+
+#define all(x) (x).begin(), (x).end()
+
+#define INF 0x3FFFFFFF
+
+using namespace std;
+
+using ll = long long;
+using ld = long double;
+using pii = pair<int,int>;
+using pll = pair<ll, ll>;
+
+int main()
+{
+    ios::sync_with_stdio(0);
+    cin.tie(0); cout.tie(0);
+
+    int n;
+    cin >> n;
+
+    int before = 'T';
+    string s;
+    cin >> s;
+    map<ll, ll> _m;
+
+    int cnt = 0;
+    for(int i = 0; i < n; i++) {
+        if(s[i] == 'T') _m[cnt]++;
+        if(s[i] == 'T') cnt = 0;
+        else cnt += 1;
+    }
+    _m[cnt]++;
+    
+    ll ans = 0;
+    bool flag = false;
+    for(auto [k, v] : _m) {
+        switch(k) {
+            case 0:
+            case 1:
+            case 2:
+                ans += k * v;
+                break;
+            case 4:
+                ans += 3 * v;
+                break;
+            default:
+                flag = true;
+                break;
+        }
+    }
+
+    if(flag) {
+        cout << "First\n";
+        return 0;
+    }
+    cout << (ans % 2 ? "First\n" : "Second\n");
+
+    return 0;
+}
