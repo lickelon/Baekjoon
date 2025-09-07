@@ -1,0 +1,47 @@
+#include <bits/stdc++.h>
+
+#define INF 0x3FFFFFFF
+
+using namespace std;
+
+using ll = long long;
+using ld = long double;
+using pii = pair<int,int>;
+using pll = pair<ll, ll>;
+
+int main()
+{
+    ios::sync_with_stdio(0);
+    cin.tie(0); cout.tie(0);
+
+    int n;
+    cin >> n;
+    vector<vector<int>> board(n, vector<int>(n));
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < n; j++) {
+            cin >> board[i][j];
+        }
+    }
+
+    int ans = 0;
+    for(int i = 0; i < n*n; i++) {
+        for(int j = 0; j < n*n; j++) {
+            vector<int> arr;
+            for(int x = i % n; x <= j % n; x++) {
+                for(int y = i / n; y <= j / n; y++) {
+                    arr.emplace_back(board[x][y]);
+                }
+            }
+            if(arr.size() == 0) continue;
+            ranges::sort(arr);
+            bool flag = true;
+            for(int i = 0; i < arr.size(); i++) {
+                if(arr[i] != i+1) flag = false;
+            }
+            ans += flag;
+        }
+    }
+    cout << ans;
+
+    return 0;
+}
