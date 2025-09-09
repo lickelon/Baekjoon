@@ -1,0 +1,57 @@
+#include <bits/stdc++.h>
+
+#define INF 0x3FFFFFFF
+
+using namespace std;
+
+using ll = long long;
+using ld = long double;
+using pii = pair<int,int>;
+using pll = pair<ll, ll>;
+
+int main()
+{
+    ios::sync_with_stdio(0);
+    cin.tie(0); cout.tie(0);
+
+    string s;
+    cin >> s;
+    int n;
+    cin >> n;
+
+    vector<pair<string, string>> arr(n);
+    for(int i = 0; i < n; i++) {
+        string t;
+        cin >> t;
+        int pos = t.find('=');
+        arr[i].first = t.substr(0, pos);
+        arr[i].second = t.substr(pos+1);
+    }
+
+    int step = 0;
+    while(true) {
+        bool flag = false;
+
+        for(auto &[a, b] : arr) {
+            int pos = s.find(a);
+            if(pos == string::npos) continue;
+            s.replace(pos, a.length(), b);
+            flag = true;
+            step++;
+
+            if(step > 5000) {
+                println("Time Limit Exceeded");
+                return 0;
+            }
+            if(s.length() > 255) {
+                println("Memory Limit Exceeded");
+                return 0;
+            }
+            break;
+        }
+        if(!flag) break;
+    }
+    println("{}", s);
+
+    return 0;
+}
