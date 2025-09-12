@@ -1,0 +1,36 @@
+#include <bits/stdc++.h>
+
+#define INF 0x3FFFFFFF
+
+using namespace std;
+
+using ll = long long;
+using ld = long double;
+using pii = pair<int,int>;
+using pll = pair<ll, ll>;
+
+int main()
+{
+    ios::sync_with_stdio(0);
+    cin.tie(0); cout.tie(0);
+
+    int n;
+    cin >> n;
+    vector<int> arr(n);
+    for(auto &e : arr) cin >> e;
+
+    int i = 0;
+    int ans = 0;
+    while(i < n) {
+        int j = i;
+        while(j + 1 < n && arr[j] < arr[j+1]) j++;
+        int k = j;
+        while(k + 1 < n && arr[k] > arr[k+1]) k++;
+        ans = max(ans, k-i+1);
+        i = j;
+        i++;
+    }
+    println("{}", ans);
+
+    return 0;
+}
