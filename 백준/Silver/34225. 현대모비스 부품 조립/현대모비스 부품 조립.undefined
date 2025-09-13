@@ -1,0 +1,47 @@
+#include <bits/stdc++.h>
+
+#define INF 0x3FFFFFFF
+
+using namespace std;
+
+using ll = long long;
+using ld = long double;
+using pii = pair<int,int>;
+using pll = pair<ll, ll>;
+
+int main()
+{
+    ios::sync_with_stdio(0);
+    cin.tie(0); cout.tie(0);
+
+    int n;
+    cin >> n;
+
+    vector<pll> arr(n);
+    for(int i = 0; i < n; i++) {
+        cin >> arr[i].first;
+        arr[i].second = i+1;
+    }
+    ranges::sort(arr, greater<pii>());
+
+    ll score = arr[0].first * 3;
+    ll M = score;
+    int idx = 0;
+    for(int i = 1; i < n; i++) {
+        score = score - arr[i-1].first + arr[i].first * 2;
+        if(score > M) {
+            M = score;
+            idx = i;
+        }
+    }
+
+    vector<int> ans;
+    for(int i = 0; i <= idx; i++) {
+        ans.emplace_back(arr[i].second);
+    }
+    ranges::sort(ans);
+    println("{}", ans.size());
+    for(auto e : ans) print("{} ", e);
+
+    return 0;
+}
