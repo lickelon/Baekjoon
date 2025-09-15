@@ -1,0 +1,50 @@
+#include <bits/stdc++.h>
+
+#define INF 0x3FFFFFFF
+
+using namespace std;
+
+using ll = long long;
+using ld = long double;
+using pii = pair<int,int>;
+using pll = pair<ll, ll>;
+
+int main()
+{
+    ios::sync_with_stdio(0);
+    cin.tie(0); cout.tie(0);
+
+    int n, e;
+    cin >> n >> e;
+
+    vector<int> arr(n+1);
+    int cnt = 0;
+    for(int i = 0; i < e; i++) {
+        int k;
+        cin >> k;
+        vector<ll> p(k);
+        for(auto &e : p) cin >> e;
+        ranges::sort(p);
+        if(p[0] == 1) {
+            for(auto e : p) {
+                arr[e] |= (1 << cnt);
+            }
+            cnt++;
+        }
+        else {
+            for(auto u : p) {
+                for(auto v : p) {
+                    arr[u] |= arr[v];
+                    arr[v] |= arr[u];
+                }
+            }
+        }
+    }
+    for(int i = 1; i <= n; i++) {
+        if(arr[i] == arr[1]) {
+            println("{}", i);
+        }
+    }
+
+    return 0;
+}
