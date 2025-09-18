@@ -1,0 +1,45 @@
+#include <bits/stdc++.h>
+
+#define INF 0x3FFFFFFF
+
+using namespace std;
+
+using ll = long long;
+using ld = long double;
+using pii = pair<int,int>;
+using pll = pair<ll, ll>;
+
+int main()
+{
+    ios::sync_with_stdio(0);
+    cin.tie(0); cout.tie(0);
+
+    int a, b, c, d;
+    cin >> a >> b >> c >> d;
+
+    int ca, cb, cc;
+    ca = cb = cc = 0;
+
+    int sieve[1001] = {};
+    for(int i = 2; i <= 1000; i++) {
+        if(sieve[i]) continue;
+        for(int j = i*2; j <= 1000; j += i) sieve[j] = 1;
+        int state = 0;
+        if(a <= i && i <= b) state += 1;
+        if(c <= i && i <= d) state += 2;
+        if(state & 1) ca++;
+        if(state & 2) cb++;
+        if(state & 3) cc++;
+    }
+    
+    bool reversed = false;
+    if(cc % 2) {
+        reversed = true;
+        swap(ca, cb);
+    }
+    println("{}", ((ca <= cb) ^ reversed) ? "yj" : "yt");
+
+    
+
+    return 0;
+}
