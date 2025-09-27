@@ -1,0 +1,42 @@
+#include <bits/stdc++.h>
+
+#define INF 0x3FFFFFFF
+
+using namespace std;
+
+using ll = long long;
+using ld = long double;
+using pii = pair<int,int>;
+using pll = pair<ll, ll>;
+
+int main()
+{
+    ios::sync_with_stdio(0);
+    cin.tie(0); cout.tie(0);
+
+    int T;
+    cin >> T;
+
+    int sc = 1;
+    while(sc <= T) {
+        int m, n;
+        cin >> m >> n;
+        vector<int> arr(n);
+        for(auto &e : arr) cin >> e;
+
+        ranges::sort(arr);
+        int cnt, score, t;
+        cnt = score = t = 0;
+        for(int i = 0; i < n; i++) {
+            t += arr[i];
+            if(t > m) break;
+            cnt++;
+            score += t;
+        }
+
+        println("Scenario #{}:", sc++);
+        println("Steve wins with {} solved problems and a score of {}.\n", cnt, score);
+    }
+
+    return 0;
+}
