@@ -1,0 +1,37 @@
+#include <bits/stdc++.h>
+
+#define INF 0x3FFFFFFF
+
+using namespace std;
+
+using ll = long long;
+using ld = long double;
+using pii = pair<int,int>;
+using pll = pair<ll, ll>;
+
+int main()
+{
+    ios::sync_with_stdio(0);
+    cin.tie(0); cout.tie(0);
+
+    int T;
+    cin >> T;
+    while(T--) {
+        int n;
+        cin >> n;
+
+        int sum = (1 != n);
+        for(int i = 2; i * i <= n; i++) {
+            if(n % i == 0) {
+                sum += i;
+                if(i != n/i) sum += n/i;
+            }
+        }
+        auto comp = sum <=> n;
+        if(is_gt(comp)) println("abundant");
+        if(is_eq(comp)) println("perfect");
+        if(is_lt(comp)) println("deficient");
+    }
+
+    return 0;
+}
