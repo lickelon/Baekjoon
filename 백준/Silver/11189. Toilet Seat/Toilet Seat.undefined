@@ -1,0 +1,50 @@
+#include <bits/stdc++.h>
+
+#define INF 0x3FFFFFFF
+
+using namespace std;
+
+using ll = long long;
+using ld = long double;
+using pii = pair<int,int>;
+using pll = pair<ll, ll>;
+
+int check(char &as, char to) {
+    int ret = (as != to);
+    as = to;
+    return ret;
+}
+
+int main()
+{
+    ios::sync_with_stdio(0);
+    cin.tie(0); cout.tie(0);
+
+    string s;
+    cin >> s;
+
+    int cnt = 0;
+    char before = s[0];
+    for(int i = 1; i < s.length(); i++) {
+        cnt += check(before, s[i]);
+        cnt += check(before, 'U');
+    }
+    println("{}", cnt);
+
+    cnt = 0;
+    before = s[0];
+    for(int i = 1; i < s.length(); i++) {
+        cnt += check(before, s[i]);
+        cnt += check(before, 'D');
+    }
+    println("{}", cnt);
+
+    cnt = 0;
+    before = s[0];
+    for(int i = 1; i < s.length(); i++) {
+        cnt += check(before, s[i]);
+    }
+    println("{}", cnt);
+
+    return 0;
+}
