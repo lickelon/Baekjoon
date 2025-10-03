@@ -1,0 +1,35 @@
+#include <bits/stdc++.h>
+
+#define INF 0x3FFFFFFF
+
+using namespace std;
+
+using ll = long long;
+using ld = long double;
+using pii = pair<int,int>;
+using pll = pair<ll, ll>;
+
+int main()
+{
+    ios::sync_with_stdio(0);
+    cin.tie(0); cout.tie(0);
+
+    int T;
+    cin >> T;
+    while(T--) {
+        int n;
+        cin >> n;
+
+        int x = n+1;
+        bool flag = true;
+        for(int i = 2; i * i <= x; i++) {
+            if(x % i == 0) flag = false;
+        }
+        if(flag) {
+            println("1\n1 {}", x);
+        }
+        else println("0");
+    }
+
+    return 0;
+}
