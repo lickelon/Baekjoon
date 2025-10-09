@@ -1,0 +1,30 @@
+#include <bits/stdc++.h>
+
+#define INF 0x3FFFFFFF
+
+using namespace std;
+
+using ll = long long;
+using ld = long double;
+using pii = pair<int,int>;
+using pll = pair<ll, ll>;
+
+int main()
+{
+    ios::sync_with_stdio(0);
+    cin.tie(0); cout.tie(0);
+
+    int a, b;
+    cin >> a >> b;
+
+    ld f1, f2;
+    cin >> f1 >> f2;
+    int c = f1*100+0.5, d = f2*100+0.5;
+
+    auto comp = (a-1)*d <=> (b-1)*c;
+    if(is_gt(comp)) println("JAKARTA");
+    if(is_eq(comp)) println("SAME");
+    if(is_lt(comp)) println("TAOYUAN");
+
+    return 0;
+}
