@@ -1,0 +1,47 @@
+#include <bits/stdc++.h>
+
+#define all(x) (x).begin(), (x).end()
+
+#define INF 0x3FFFFFFF
+#define PI 3.141592653589793
+
+//#define _ << " " <<
+//#define endl "\n"
+
+using namespace std;
+
+using ll = long long;
+using ld = long double;
+using pii = pair<int,int>;
+using pll = pair<ll, ll>;
+
+inline void solve()
+{
+    int n;
+    cin >> n;
+    int arr[101] = {};
+    for(int i = 0; i < n; i++) {
+        cin >> arr[0];
+        arr[arr[0]] = 1;
+    }
+    arr[0] = 0;
+    int cnt = ranges::count_if(arr, [](int a){return a;});
+    println("{}", cnt * 2 - 1);
+}
+
+int main()
+{
+    ios::sync_with_stdio(0);
+    cin.tie(0); cout.tie(0);
+    //cout<<fixed; cout.precision(15);
+
+    int T;
+    cin >> T;
+
+    while(T--)
+    {
+        solve();
+    }
+
+    return 0;
+}
