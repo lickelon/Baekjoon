@@ -1,0 +1,35 @@
+#include <bits/stdc++.h>
+
+#define INF 0x3FFFFFFF
+
+using namespace std;
+
+using ll = long long;
+using ld = long double;
+using pii = pair<int,int>;
+using pll = pair<ll, ll>;
+
+int main()
+{
+    ios::sync_with_stdio(0);
+    cin.tie(0); cout.tie(0);
+
+    map<char, char> _m;
+
+    string ss[] = {"=-0987654321`", "\\][POIUYTREWQ", "';LKJHGFDSA", "/.,MNBVCXZ"};
+    for(auto s : ss) {
+        for(int i = 0; i < s.length()-1; i++) {
+            _m[s[i]] = s[i+1];
+        }
+    }
+    _m[' '] = ' ';
+
+    string input;
+    while(getline(cin, input)) {
+        for(auto c : input) {
+            print("{}", _m[c]);
+        }
+        println("");
+    }
+    return 0;
+}
