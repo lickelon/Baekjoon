@@ -1,0 +1,44 @@
+#include <bits/stdc++.h>
+
+#define INF 0x3FFFFFFF
+
+using namespace std;
+
+using ll = long long;
+using ld = long double;
+using pii = pair<int,int>;
+using pll = pair<ll, ll>;
+
+int main()
+{
+    ios::sync_with_stdio(0);
+    cin.tie(0); cout.tie(0);
+
+    int n, m, h;
+    cin >> n >> m >> h;
+
+    vector<vector<int>> arr(n, vector<int>(m));
+    for(int i = 0; i < m; i++) {
+        int x;
+        cin >> x;
+        for(int j = 0; j < n; j++) {
+            if(j < x) arr[j][i] = 1;
+        }
+    }
+    for(int i = n-1; i >= 0; i--) {
+        for(int j = 0; j < m; j++) {
+            if(i == h-1) {
+                print("{}", arr[i][j] ? "*" : "-");
+            }
+            else if(i < h-1 && j % 3 == 2) {
+                print("{}", arr[i][j] ? "#" : "|");
+            }
+            else {
+                print("{}", arr[i][j] ? "#" : ".");
+            }
+        }
+        println("");
+    }
+
+    return 0;
+}
