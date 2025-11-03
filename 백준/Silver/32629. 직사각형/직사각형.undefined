@@ -1,0 +1,29 @@
+#include <bits/stdc++.h>
+
+#define INF 0x3FFFFFFF
+
+using namespace std;
+
+using ll = long long;
+using ld = long double;
+using pii = pair<int,int>;
+using pll = pair<ll, ll>;
+
+int main()
+{
+    ios::sync_with_stdio(0);
+    cin.tie(0); cout.tie(0);
+
+    int T;
+    cin >> T;
+    while(T--) {
+        int n;
+        cin >> n;
+        int h = (int)(sqrt(n-1)+0.5);
+        if(n == 1) h = 1;
+        int w = ((n+h-1)/h);
+        println("{}", (h+w)*2);
+    }
+
+    return 0;
+}
