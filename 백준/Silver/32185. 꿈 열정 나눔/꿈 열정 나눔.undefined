@@ -1,0 +1,41 @@
+#include <bits/stdc++.h>
+
+#define INF 0x3FFFFFFF
+
+using namespace std;
+
+using ll = long long;
+using ld = long double;
+using pii = pair<int,int>;
+using pll = pair<ll, ll>;
+
+int main()
+{
+    ios::sync_with_stdio(0);
+    cin.tie(0); cout.tie(0);
+
+    int n, m;
+    cin >> n >> m;
+
+    int p = 0;
+    int input[3];
+    cin >> input[0] >> input[1] >> input[2];
+    p = ranges::fold_left(input, 0, plus<int>());
+
+    vector<pii> arr;
+    for(int i = 0; i < n; i++) {
+        for(auto &e : input) cin >> e;
+        int sum = ranges::fold_left(input, 0, plus<int>());
+        if(sum <= p) {
+            arr.emplace_back(sum, i+1);
+        }
+    }
+
+    print("0 ");
+    ranges::sort(arr, [](pii &a, pii &b){return a.first > b.first;});
+    for(int i = 0; i < min<int>(m-1, arr.size()); i++) {
+        print("{} ", arr[i].second);
+    }
+
+    return 0;
+}
