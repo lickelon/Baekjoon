@@ -32,8 +32,8 @@ int main()
 
     int ans = 0;
     vector<vector<int>> visit(n, vector<int>(m));
-    int dx[4] = {0, 1, 0, -1};
-    int dy[4] = {1, 0, -1, 0};
+    int dx[8] = {0, 1, 0, -1, 1, 1, -1, -1};
+    int dy[8] = {1, 0, -1, 0, 1, -1, 1, -1};
     for(int i = 0; i < n; i++) {
         for(int j = 0; j < m; j++) {
             if(visit[i][j]) continue;
@@ -41,11 +41,11 @@ int main()
             _q.emplace(i, j);
             visit[i][j] = 1;
             while(!_q.empty()) {
-                auto &[cx, cy] = _q.front(); _q.pop();
-                for(int d = 0; d < 4; d++) {
+                auto [cx, cy] = _q.front(); _q.pop();
+                for(int d = 0; d < 8; d++) {
                     int x = cx + dx[d];
                     int y = cy + dy[d];
-                    if(x < 0 || x >= n || y < 0 || y >= n) continue;
+                    if(x < 0 || x >= n || y < 0 || y >= m) continue;
                     if(!visit[x][y] && arr[cx][cy] == arr[x][y]) {
                         _q.emplace(x, y);
                         visit[x][y] = 1;
