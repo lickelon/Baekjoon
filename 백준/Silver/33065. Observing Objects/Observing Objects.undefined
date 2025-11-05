@@ -1,0 +1,60 @@
+#include <bits/stdc++.h>
+
+#define INF 0x3FFFFFFF
+
+using namespace std;
+
+using ll = long long;
+using ld = long double;
+using pii = pair<int,int>;
+using pll = pair<ll, ll>;
+
+int main()
+{
+    ios::sync_with_stdio(0);
+    cin.tie(0); cout.tie(0);
+
+    int n, m;
+    cin >> n >> m;
+    vector<vector<int>> arr(n, vector<int>(m));
+
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < m; j++) {
+            int t = 0;
+            for(int k = 0; k < 3; k++) {
+                int input;
+                cin >> input;
+                t = (t << 8) + input;
+            }
+            arr[i][j] = t;
+        }
+    }
+
+    int ans = 0;
+    vector<vector<int>> visit(n, vector<int>(m));
+    int dx[4] = {0, 1, 0, -1};
+    int dy[4] = {1, 0, -1, 0};
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < m; j++) {
+            if(visit[i][j]) continue;
+            queue<pii> _q;
+            _q.emplace(i, j);
+            visit[i][j] = 1;
+            while(!_q.empty()) {
+                auto &[cx, cy] = _q.front(); _q.pop();
+                for(int d = 0; d < 4; d++) {
+                    int x = cx + dx[d];
+                    int y = cy + dy[d];
+                    if(x < 0 || x >= n || y < 0 || y >= n) continue;
+                    if(!visit[x][y] && arr[cx][cy] == arr[x][y]) {
+                        _q.emplace(x, y);
+                        visit[x][y] = 1;
+                    }
+                }
+            }
+            ans++;
+        }
+    }
+    println("{}", ans);
+    return 0;
+}
