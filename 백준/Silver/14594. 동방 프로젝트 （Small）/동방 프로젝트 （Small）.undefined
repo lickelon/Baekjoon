@@ -1,0 +1,41 @@
+#include <bits/stdc++.h>
+
+#define INF 0x3FFFFFFF
+
+using namespace std;
+
+using ll = long long;
+using ld = long double;
+using pii = pair<int,int>;
+using pll = pair<ll, ll>;
+
+int main()
+{
+    ios::sync_with_stdio(0);
+    cin.tie(0); cout.tie(0);
+
+    int n;
+    cin >> n;
+    vector<int> arr(n+1);
+    ranges::iota(arr, 0);
+
+    int m;
+    cin >> m;
+    for(int i = 0; i < m; i++) {
+        int a, b;
+        cin >> a >> b;
+        for(int j = a+1; j <= b; j++) {
+            arr[j] = arr[a];
+        }
+    }
+
+    int cnt = 0, idx = n;
+    while(idx) {
+        while(idx != arr[idx]) idx = arr[idx];
+        cnt++;
+        idx--;
+    }
+    println("{}", cnt);
+
+    return 0;
+}
