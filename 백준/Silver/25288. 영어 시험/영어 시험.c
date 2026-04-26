@@ -1,0 +1,1 @@
+a[];main(i){scanf("%d%s",&i,a);while(i--)printf(a);}

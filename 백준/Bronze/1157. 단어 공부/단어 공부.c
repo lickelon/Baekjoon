@@ -1,0 +1,1 @@
+a[],b,c;main(s,t){for(;(s=getchar()&95)>10;c=b^t?b<t?b=t,s:c:63)t=++a[s];puts(&c);}

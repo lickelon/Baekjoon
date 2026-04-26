@@ -1,0 +1,30 @@
+#include <bits/stdc++.h>
+
+#define INF 0x7FFFFFFF
+
+using namespace std;
+
+using ll = long long;
+using ld = long double;
+using pii = pair<int,int>;
+
+ll gcd(ll a, ll b)
+{
+    if (!b) return a;
+    return gcd(b, a % b);
+}
+
+int main()
+{
+    ios::sync_with_stdio(0);
+    cin.tie(0); cout.tie(0);
+
+    int a, b;
+
+    cin >> a >> b;
+    if(a >= 3 && b <= 4) cout << "TroyMartian\n";
+    if(a <= 6 && b >= 2) cout << "VladSaturnian\n";
+    if(a <= 2 && b <= 3) cout << "GraemeMercurian\n";
+
+    return 0;
+}

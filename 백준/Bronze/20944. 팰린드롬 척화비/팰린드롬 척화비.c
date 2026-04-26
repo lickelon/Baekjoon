@@ -1,0 +1,1 @@
+main(k){for(scanf("%d",&k);k--;)printf("a");}

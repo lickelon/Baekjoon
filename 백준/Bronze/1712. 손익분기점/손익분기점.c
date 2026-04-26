@@ -1,0 +1,1 @@
+main(A,B,C){scanf("%d%d%d",&A,&B,&C);printf("%d",C-B>0?A/(C-B)+1:-1);}

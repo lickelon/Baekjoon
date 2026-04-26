@@ -1,0 +1,1 @@
+input();a=input()[::2];print(f'1/{(a+a).find(a,1)}')

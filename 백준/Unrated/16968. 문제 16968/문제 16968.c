@@ -1,0 +1,1 @@
+b,c;main(r){for(;c=getchar()-10;b=c)r*=(c-89?10:26)-!(c-b);printf("%d",r);}
